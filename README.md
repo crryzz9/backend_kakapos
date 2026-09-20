@@ -14,7 +14,7 @@ Backend de un e-commerce de merchandising de kakapos.
 ### 1. Clonar el repositorio
 
 ```bash
-git clone <URL_DEL_REPOSITORIO_BACKEND>
+git clone https://github.com/crryzz9/backend_kakapos
 ```
 
 ### 2. Entrar en la carpeta del proyecto
