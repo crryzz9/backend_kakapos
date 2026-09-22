@@ -29,7 +29,25 @@ cd backend_kakapos
 npm install
 ```
 
-### 4. Ejecutar el proyecto
+### 4. Configurar las variables de entorno de Docker
+
+Dentro de la carpeta `docker/` crea un archivo `.env` con las credenciales de MongoDB:
+
+```text
+MONGO_USER=<tu_usuario>
+MONGO_PASSWORD=<tu_contraseña>
+```
+
+### 5. Levantar la base de datos con Docker
+
+```bash
+cd docker
+docker-compose up -d
+```
+
+Esto inicia un contenedor de MongoDB (`ecommerce-mongo`) accesible en `localhost:27017`, con los datos persistidos en el volumen `mongo_data`.
+
+### 6. Ejecutar el proyecto
 
 ```bash
 npm run dev
