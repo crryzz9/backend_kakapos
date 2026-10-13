@@ -15,11 +15,11 @@ const usuariSchema = new mongoose.Schema({
     // y que la parte final (.com, .es...) tenga al menos 2 letras
     validate: {
     validator: (v) => /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(v),
-    // Mensaje de error; props.value es el email que se ha intentado guardar
-    message: (props) => `${props.value} no és un email vàlid`,
+    // Mensaje de error; missatge.value es el email que se ha intentado guardar
+    message: (missatge) => `${missatge.value} no és un email vàlid`,
   },
   },
-  // Contraseña: obligatoria (lo normal es guardarla encriptada, no en texto plano)
+  // Contraseña: obligatoria
   password: { type: String, required: true },
   // Rol: 'client' o 'admin'. Por defecto todos son 'client'
   rol: { type: String, enum: ['client', 'admin'], default: 'client' },
