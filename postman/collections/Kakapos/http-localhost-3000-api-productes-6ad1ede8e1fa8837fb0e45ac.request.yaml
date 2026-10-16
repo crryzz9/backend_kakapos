@@ -1,0 +1,6 @@
+$kind: http-request
+name: http://localhost:3000/api/productes/6ad1ede8e1fa8837fb0e45ac
+description: Prueba 1, el id es el de la prueba que he hecho en la session 5, creando una camiseta
+url: http://localhost:3000/api/productes/6ad1ede8e1fa8837fb0e45ac
+method: GET
+order: 2000

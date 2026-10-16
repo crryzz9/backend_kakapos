@@ -1,0 +1,21 @@
+$kind: http-request
+name: http://localhost:3000/api/productes
+description: ""
+url: http://localhost:3000/api/productes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \    \"nom\": \"Samarreta Kakapos\",\r
+
+    \    \"descripcio\": \"Samarreta oficial\",\r
+
+    \    \"preu\": 19.99,\r
+
+    \    \"estoc\": 50,\r
+
+    \    \"categoriaId\": \"507f1f77bcf86cd799439011\"\r
+
+    }"
+order: 1000
