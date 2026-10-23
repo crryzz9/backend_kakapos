@@ -1,0 +1,1025 @@
+{
+  "info": {
+    "name": "Ecommerce API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Categoria",
+      "item": [
+        {
+          "name": "http://localhost:3000/api/categories",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/categories",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Samarretes\",\n  \"slug\": \"samarretes\",\n  \"descripcio\": \"Roba de Kakapos\",\n  \"actiu\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST http://localhost:3000/api/categories categoria gorres",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/categories",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Gorres\",\n  \"slug\": \"gorres\",\n  \"descripcio\": \"Gorres de Kakapos\",\n  \"actiu\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST de la categoria de tasses",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/categories",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Tasses\",\n  \"slug\": \"Tasses\",\n  \"descripcio\": \"Tasses de Kakapos\",\n  \"actiu\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET de todas las categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/categories",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE categories",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/categories",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT categories",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/categories/<id>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories",
+                "<id>"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear categoria (correcta)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "  {\n    \"nom\": \"Categoria Postman\",\n    \"slug\": \"{{slugCategoria}}\",\n    \"descripcio\": \"Categoria creada amb Postman\",\n    \"actiu\": true\n  }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.environment.set(\"slugCategoria\", \"cat-\" + Date.now());"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 201\", () => {",
+                  "  pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response is JSON\", () => {",
+                  "  pm.response.to.be.json;",
+                  "});",
+                  "if (pm.response.code === 201) {",
+                  "  pm.environment.set(\"categoriaId\", pm.response.json().data._id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Crear categoria sense nom (da error)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"slug\": \"sense-nom\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 422\", () => {",
+                  "  pm.response.to.have.status(422);",
+                  "});",
+                  "pm.test(\"Codi VALIDATION_ERROR\", () => {",
+                  "  pm.expect(pm.response.json().error.code).to.eql(\"VALIDATION_ERROR\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Crear categoria amb slug duplicat (da error)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/categories",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Categoria Duplicada\",\n  \"slug\": \"{{slugCategoria}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 409\", () => {",
+                  "  pm.response.to.have.status(409);",
+                  "});",
+                  "pm.test(\"Codi DUPLICATE_KEY\", () => {",
+                  "  pm.expect(pm.response.json().error.code).to.eql(\"DUPLICATE_KEY\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Producte",
+      "item": [
+        {
+          "name": "http://localhost:3000/api/productes",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/productes",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "productes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nom\": \"Samarreta Kakapos\",\n    \"descripcio\": \"Samarreta oficial\",\n    \"preu\": 19.99,\n    \"estoc\": 50,\n    \"categoriaId\": \"507f1f77bcf86cd799439011\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "http://localhost:3000/api/productes/6ad1ede8e1fa8837fb0e45ac",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/productes/6ad1ede8e1fa8837fb0e45ac",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "productes",
+                "6ad1ede8e1fa8837fb0e45ac"
+              ]
+            },
+            "description": "Prueba 1, el id es el de la prueba que he hecho en la session 5, creando una camiseta"
+          },
+          "response": []
+        },
+        {
+          "name": "POST de crear el producte de samarreta de maniga llargues",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/productes",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "productes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Samarreta de manigues llargues Kakapos\",\n  \"descripcio\": \"Samarreta de cotó amb el kakapo estampat i manigues llargues\",\n  \"preu\": 29.99,\n  \"estoc\": 50,\n  \"categoriaId\": \"6ad878391827627656fda09a\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST de crear la samarreta de tirants",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/productes",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "productes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Samarreta de tirants Kakapos\",\n  \"descripcio\": \"Samarreta de cotó amb el kakapo estampat i de tirants\",\n  \"preu\": 12.99,\n  \"estoc\": 50,\n  \"categoriaId\": \"6ad878391827627656fda09a\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST de crear la gorra classica",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/productes",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "productes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Gorra Kakapos Clàssica\",\n  \"descripcio\": \"Gorra ajustable amb logo brodat\",\n  \"preu\": 14.95,\n  \"estoc\": 30,\n  \"categoriaId\": \"6ad8792a1827627656fda09b\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST de crear la gorra x New Era",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/productes",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "productes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Gorra Kakapos x New Era\",\n  \"descripcio\": \"Edició limitada en col·laboració amb New Era, amb logo brodat\",\n  \"preu\": 34.95,\n  \"estoc\": 25,\n  \"categoriaId\": \"6ad8792a1827627656fda09b\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST de crear tassa classica",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/productes",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "productes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Tassa Kakapos Clàssica\",\n  \"descripcio\": \"Tassa de ceràmica de 350 ml amb el kakapo estampat\",\n  \"preu\": 6.90,\n  \"estoc\": 80,\n  \"categoriaId\": \"6ad879901827627656fda09c\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST de crear tassa de cafe(Expresso)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/productes",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "productes"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Tassa Espresso Kakapos\",\n  \"descripcio\": \"Tassa petita de ceràmica de 90 ml per al cafè, amb plat a joc\",\n  \"preu\": 5.50,\n  \"estoc\": 45,\n  \"categoriaId\": \"6ad879901827627656fda09c\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET de productes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/productes",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "productes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE producte",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/productes/<id>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "productes",
+                "<id>"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE usuari",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/productes/<id>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "productes",
+                "<id>"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Usuari",
+      "item": [
+        {
+          "name": "POST de usuari de prova anna",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/usuaris",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "usuaris"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n    \"nom\": \"Anna Prova\", \n    \"email\": \"anna@example.com\", \n    \"password\": \"Contrasenya-Prova-2026\" \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST de usuari de prova marc",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/usuaris",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "usuaris"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n    \"nom\": \"Marc Prova\", \n    \"email\": \"marc@example.com\", \n    \"password\": \"Contrasenya-Prova-2026\" \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "POST de usuari de prova xavi",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/usuaris",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "usuaris"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{ \n    \"nom\": \"Xavi Prova\", \n    \"email\": \"xavi@example.com\", \n    \"password\": \"Contrasenya-Prova-2026\" \n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "prova de modificar el nom de anna",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/usuaris/6adb16565f5331827dd2d285",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "usuaris",
+                "6adb16565f5331827dd2d285"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nom\": \"Anna Modificada\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "desactivar usuari marc",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/usuaris/6adb16e95f5331827dd2d286",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "usuaris",
+                "6adb16e95f5331827dd2d286"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nom\": \"Anna Modificada\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "crear conflicte email duplicat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/api/usuaris",
+              "host": [
+                "http://localhost:3000"
+              ],
+              "path": [
+                "api",
+                "usuaris"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{ \"nom\": \"Anna2\", \"email\": \"anna@example.com\", \"password\": \"Contrasenya-Prova-2026\" }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET usuaris",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuaris",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuaris"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT usuaris",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuaris/<id>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuaris",
+                "<id>"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE usuaris",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuaris/<id>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuaris",
+                "<id>"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Crear usuari (correcte)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuaris",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuaris"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Usuari Postman\",\n  \"email\": \"{{emailUsuari}}\",\n  \"password\": \"Contrasenya-Prova-2026\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.environment.set(\"emailUsuari\", \"usuari\" + Date.now() + \"@example.com\");"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 201\", () => {",
+                  "  pm.response.to.have.status(201);",
+                  "});",
+                  "pm.test(\"Response is JSON\", () => {",
+                  "  pm.response.to.be.json;",
+                  "});",
+                  "pm.test(\"No exposa passwordHash\", () => {",
+                  "  pm.expect(pm.response.text()).to.not.include(\"passwordHash\");",
+                  "});",
+                  "if (pm.response.code === 201) {",
+                  "  pm.environment.set(\"usuariId\", pm.response.json().data._id);",
+                  "}"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Crear usuari amb email duplicat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuaris",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuaris"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nom\": \"Usuari Postman\",\n  \"email\": \"{{emailUsuari}}\",\n  \"password\": \"Contrasenya-Prova-2026\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 409\", () => {",
+                  "  pm.response.to.have.status(409);",
+                  "});",
+                  "pm.test(\"Codi DUPLICATE_KEY\", () => {",
+                  "  pm.expect(pm.response.json().error.code).to.eql(\"DUPLICATE_KEY\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Llistar usuaris (sin passwordHash)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/usuaris",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "usuaris"
+              ]
+            }
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {",
+                  "  pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"No exposa passwordHash\", () => {",
+                  "  pm.expect(pm.response.text()).to.not.include(\"passwordHash\");",
+                  "});"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
