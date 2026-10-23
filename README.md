@@ -137,27 +137,79 @@ Ejemplo de cuerpo para `POST /api/productes`:
   "categoriaId": "507f1f77bcf86cd799439011"
 }
 ```
-
 ### Usuarios (`/api/usuaris`)
 
 | Método | URL | Descripción |
 |---|---|---|
-| GET | `/api/usuaris` | Lista todos los usuarios |
-| GET | `/api/usuaris/:id` | Obtiene un usuario |
 | POST | `/api/usuaris` | Crea un usuario |
-| PUT | `/api/usuaris/:id` | Modifica un usuario |
-| DELETE | `/api/usuaris/:id` | Elimina un usuario |
+| GET | `/api/usuaris` | Lista los usuarios |
+| GET | `/api/usuaris/:id` | Obtiene un usuario |
+| PUT | `/api/usuaris/:id` | Modifica `nom`, `email` o `password` |
+| DELETE | `/api/usuaris/:id` | Desactiva el usuario (`actiu: false`), sin borrarlo |
 
 Ejemplo de cuerpo para `POST /api/usuaris`:
 
 ```json
 {
-  "nom": "Victor Reig",
-  "email": "victor@example.com",
-  "password": "<tu_contraseña>",
-  "rol": "client"
+  "nom": "Anna Prova",
+  "email": "anna@example.com",
+  "password": "Contrasenya-Prova-2026"
 }
 ```
+
+Notas:
+
+* La contraseña tiene entre 12 y 72 caracteres, y se guarda como hash con bcrypt. Nunca se guarda ni se devuelve en texto plano.
+* El servidor asigna `rol: client`. Los campos `rol`, `actiu` y `passwordHash` no se aceptan desde el cuerpo.
+* **Aviso:** estos endpoints todavía no tienen autenticación. Solo se deben usar en local y con datos ficticios.
+
+## Filtros, ordenación y paginación
+
+Disponibles en `GET /api/categories` y `GET /api/usuaris`:
+
+| Parámetro | Ejemplo | Descripción |
+|---|---|---|
+| `actiu` | `?actiu=true` | Filtra por activos o inactivos |
+| `nom` | `?nom=anna` | Nombres que contienen el texto |
+| `sort` | `?sort=nom` o `?sort=-createdAt` | Ordena por un campo permitido (`-` para descendente) |
+| `page` | `?page=2` | Página, entero positivo (por defecto 1) |
+| `limit` | `?limit=5` | Resultados por página (por defecto 10, máximo 50) |
+
+Respuesta:
+
+```json
+{
+  "success": true,
+  "data": [],
+  "pagination": { "page": 1, "limit": 10, "total": 25, "totalPages": 3 }
+}
+```
+
+## Formato de errores
+
+Todos los errores tienen el mismo formato:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Les dades no són vàlides",
+    "details": [{ "field": "nom", "message": "El nom és obligatori" }]
+  }
+}
+```
+
+| Código | Significado |
+|---|---|
+| 200 | Consulta correcta |
+| 201 | Recurso creado |
+| 204 | Eliminación o baja, sin cuerpo |
+| 400 | ID o datos incorrectos |
+| 404 | Recurso inexistente |
+| 409 | Email o slug duplicado |
+| 422 | Error de validación |
+| 500 | Error inesperado |
 
 ## Modelos de datos
 
