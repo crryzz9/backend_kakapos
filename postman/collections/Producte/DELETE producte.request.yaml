@@ -1,0 +1,5 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/productes/<id>"
+method: PUT
+order: 10000

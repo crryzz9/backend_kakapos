@@ -1,34 +1,41 @@
 const Producte = require('../models/Producte');
+const AppError = require('../utils/AppError');
+
+const noTrobat = () => new AppError(404, 'NOT_FOUND', 'Producte no trobat');
 
 const createProducte = async (producteData) => {
-    const newProducte = new Producte(producteData);
-    return await newProducte.save();   
+  const newProducte = new Producte(producteData);
+  return await newProducte.save();
 };
 
 const getProducte = async (id) => {
-    return await Producte.findById(id);
-}
+  const producte = await Producte.findById(id).populate('categoriaId', 'nom slug');
+  if (!producte) throw noTrobat();
+  return producte;
+};
 
 const getProductes = async () => {
-    return await Producte.find();
-}
+  return await Producte.find().populate('categoriaId', 'nom slug');
+};
 
 const updateProducte = async (id, dades) => {
-    return await Producte.findByIdAndUpdate(id, dades, { 
-        new: true,
-        runValidators: true
-    });
-}
+  const producte = await Producte.findByIdAndUpdate(id, dades, {
+    new: true,
+    runValidators: true,
+  });
+  if (!producte) throw noTrobat();
+  return producte;
+};
 
 const deleteProducte = async (id) => {
-    return await Producte.findByIdAndDelete(id);
-}
-    
+  const producte = await Producte.findByIdAndDelete(id);
+  if (!producte) throw noTrobat();
+};
 
 module.exports = {
-    createProducte,
-    getProducte,
-    getProductes,
-    updateProducte,
-    deleteProducte
+  createProducte,
+  getProducte,
+  getProductes,
+  updateProducte,
+  deleteProducte,
 };

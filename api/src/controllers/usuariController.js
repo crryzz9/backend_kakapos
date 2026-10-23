@@ -1,63 +1,55 @@
-const Usuari = require('../models/Usuari');
+const usuariService = require('../services/usuariService');
 
-const getUsuari = async (req, res) => {
-    try {
-        const usuari = await usuariService.getUsuari(req.params.id);
-        if (!usuari) {
-            return res.status(404).json({status: 'error', message: 'Usuari not found'});
-        }
-        res.status(200).json({status: 'success', data: usuari});
-    } catch (error) {
-        res.status(400).json({status: 'error', message: error.message});
-    }
+const createUsuari = async (req, res, next) => {
+  try {
+    const usuari = await usuariService.createUsuari(req.body ?? {});
+    res.status(201).json({ success: true, data: usuari });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const getUsuaris = async (req, res) => {
-    try {
-        const usuaris = await usuariService.getUsuaris();
-        res.status(200).json({status: 'success', data: usuaris});
-    } catch (error) {
-        res.status(400).json({status: 'error', message: error.message});
-    }
+const getUsuaris = async (req, res, next) => {
+  try {
+    const resultat = await usuariService.getUsuaris(req.query);
+    res.status(200).json({ success: true, ...resultat });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const createUsuari = async (req, res) => {
-    try {
-        const usuari = await usuariService.createUsuari(req.body);
-        res.status(201).json({status: 'success', data: usuari});
-    } catch (error) {
-        res.status(400).json({status: 'error', message: error.message});
-    }
+const getUsuari = async (req, res, next) => {
+  try {
+    const usuari = await usuariService.getUsuari(req.params.id);
+    res.status(200).json({ success: true, data: usuari });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const updateUsuari = async (req, res) => {
-    try {
-        const usuari = await usuariService.updateService(req.params.id, req.body);
-        if (!usuari) {
-            return res.status(404).json({status: 'error', message: 'Usuari not found'});
-        }
-        res.status(200).json({status: 'success', data: usuari});
-    } catch (error) {
-        res.status(400).json({status: 'error', message: error.message});
-    }
+const updateUsuari = async (req, res, next) => {
+  try {
+    const usuari = await usuariService.updateUsuari(req.params.id, req.body ?? {});
+    res.status(200).json({ success: true, data: usuari });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const deleteUsuari = async (req, res) => {
-    try{
-        const usuari = await usuariService.deleteUsuari(req.params.id);
-        if (!usuari) {
-            return res.status(404).json({status: 'error', message: 'Usuari not found'});
-        }
-        res.status(200).json({status: 'success', message: 'Usuari deleted successfully'});
-    } catch (error) {
-        res.status(400).json({status: 'error', message: error.message});
-    }
+// Baja lógica: sin cuerpo en la respuesta (204)
+const deleteUsuari = async (req, res, next) => {
+  try {
+    await usuariService.deleteUsuari(req.params.id);
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
-    getUsuari,
-    getUsuaris,
-    createUsuari,
-    updateUsuari,
-    deleteUsuari
+  createUsuari,
+  getUsuaris,
+  getUsuari,
+  updateUsuari,
+  deleteUsuari,
 };

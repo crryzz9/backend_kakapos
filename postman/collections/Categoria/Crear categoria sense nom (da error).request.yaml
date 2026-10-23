@@ -1,0 +1,25 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/categories"
+method: POST
+body:
+  type: json
+  content: '{ "slug": "sense-nom" }'
+scripts:
+  - type: beforeRequest
+    code: ""
+    language: text/javascript
+  - type: afterResponse
+    code: "pm.test(\"Status code is 422\", () => {\r
+
+      \  pm.response.to.have.status(422);\r
+
+      });\r
+
+      pm.test(\"Codi VALIDATION_ERROR\", () => {\r
+
+      \  pm.expect(pm.response.json().error.code).to.eql(\"VALIDATION_ERROR\");\r
+
+      });"
+    language: text/javascript
+order: 7000

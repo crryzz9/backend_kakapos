@@ -1,0 +1,20 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/productes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nom\": \"Gorra Kakapos x New Era\",\r
+
+    \  \"descripcio\": \"Edició limitada en col·laboració amb New Era, amb logo brodat\",\r
+
+    \  \"preu\": 34.95,\r
+
+    \  \"estoc\": 25,\r
+
+    \  \"categoriaId\": \"6ad8792a1827627656fda09b\"\r
+
+    }"
+order: 6000

@@ -1,0 +1,12 @@
+name: Ecommerce Local
+values:
+  - key: baseUrl
+    value: ''
+  - key: slugCategoria
+    value: ''
+  - key: categoriaId
+    value: ''
+  - key: emailUsuari
+    value: ''
+  - key: usuariId
+    value: ''

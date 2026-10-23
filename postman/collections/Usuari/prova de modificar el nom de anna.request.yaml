@@ -1,0 +1,8 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/usuaris/6adb16565f5331827dd2d285
+method: PUT
+body:
+  type: json
+  content: '{ "nom": "Anna Modificada" }'
+order: 4000

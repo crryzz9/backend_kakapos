@@ -1,0 +1,8 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/usuaris
+method: POST
+body:
+  type: json
+  content: '{ "nom": "Anna2", "email": "anna@example.com", "password": "Contrasenya-Prova-2026" }'
+order: 6000

@@ -1,0 +1,8 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/usuaris/6adb16e95f5331827dd2d286
+method: DELETE
+body:
+  type: json
+  content: '{ "nom": "Anna Modificada" }'
+order: 5000

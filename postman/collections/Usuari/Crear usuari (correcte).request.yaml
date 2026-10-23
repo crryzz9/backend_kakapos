@@ -1,0 +1,45 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/usuaris"
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nom\": \"Usuari Postman\",\r
+
+    \  \"email\": \"{{emailUsuari}}\",\r
+
+    \  \"password\": \"Contrasenya-Prova-2026\"\r
+
+    }"
+scripts:
+  - type: beforeRequest
+    code: pm.environment.set("emailUsuari", "usuari" + Date.now() + "@example.com");
+    language: text/javascript
+  - type: afterResponse
+    code: "pm.test(\"Status code is 201\", () => {\r
+
+      \  pm.response.to.have.status(201);\r
+
+      });\r
+
+      pm.test(\"Response is JSON\", () => {\r
+
+      \  pm.response.to.be.json;\r
+
+      });\r
+
+      pm.test(\"No exposa passwordHash\", () => {\r
+
+      \  pm.expect(pm.response.text()).to.not.include(\"passwordHash\");\r
+
+      });\r
+
+      if (pm.response.code === 201) {\r
+
+      \  pm.environment.set(\"usuariId\", pm.response.json().data._id);\r
+
+      }"
+    language: text/javascript
+order: 10000

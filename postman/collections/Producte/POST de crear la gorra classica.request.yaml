@@ -1,0 +1,20 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/productes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nom\": \"Gorra Kakapos Clàssica\",\r
+
+    \  \"descripcio\": \"Gorra ajustable amb logo brodat\",\r
+
+    \  \"preu\": 14.95,\r
+
+    \  \"estoc\": 30,\r
+
+    \  \"categoriaId\": \"6ad8792a1827627656fda09b\"\r
+
+    }"
+order: 5000

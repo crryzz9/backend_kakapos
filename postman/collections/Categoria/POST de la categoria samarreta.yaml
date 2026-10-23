@@ -1,0 +1,19 @@
+$kind: http-request
+name: http://localhost:3000/api/categories
+description: ""
+url: http://localhost:3000/api/categories
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nom\": \"Samarretes\",\r
+
+    \  \"slug\": \"samarretes\",\r
+
+    \  \"descripcio\": \"Roba de Kakapos\",\r
+
+    \  \"actiu\": true\r
+
+    }"
+order: 1000

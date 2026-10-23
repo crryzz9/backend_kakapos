@@ -1,0 +1,5 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/usuaris"
+method: GET
+order: 7000

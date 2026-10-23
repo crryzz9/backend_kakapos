@@ -1,0 +1,20 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/productes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nom\": \"Tassa Espresso Kakapos\",\r
+
+    \  \"descripcio\": \"Tassa petita de ceràmica de 90 ml per al cafè, amb plat a joc\",\r
+
+    \  \"preu\": 5.50,\r
+
+    \  \"estoc\": 45,\r
+
+    \  \"categoriaId\": \"6ad879901827627656fda09c\"\r
+
+    }"
+order: 8000

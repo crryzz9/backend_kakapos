@@ -1,0 +1,5 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/usuaris/<id>"
+method: PUT
+order: 8000

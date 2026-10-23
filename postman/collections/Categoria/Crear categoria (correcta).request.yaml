@@ -1,0 +1,41 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/categories"
+method: POST
+body:
+  type: json
+  content: "  {\r
+
+    \    \"nom\": \"Categoria Postman\",\r
+
+    \    \"slug\": \"{{slugCategoria}}\",\r
+
+    \    \"descripcio\": \"Categoria creada amb Postman\",\r
+
+    \    \"actiu\": true\r
+
+    \  }"
+scripts:
+  - type: beforeRequest
+    code: pm.environment.set("slugCategoria", "cat-" + Date.now());
+    language: text/javascript
+  - type: afterResponse
+    code: "pm.test(\"Status code is 201\", () => {\r
+
+      \  pm.response.to.have.status(201);\r
+
+      });\r
+
+      pm.test(\"Response is JSON\", () => {\r
+
+      \  pm.response.to.be.json;\r
+
+      });\r
+
+      if (pm.response.code === 201) {\r
+
+      \  pm.environment.set(\"categoriaId\", pm.response.json().data._id);\r
+
+      }"
+    language: text/javascript
+order: 6000

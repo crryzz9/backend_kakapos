@@ -1,14 +1,28 @@
-// Importamos mongoose para poder trabajar con MongoDB
 const mongoose = require('mongoose');
 
-// Molde de los datos de una categoría de productos
-const categoriaSchema = new mongoose.Schema({
-  // Nombre: obligatorio, entre 2 y 50 caracteres
-  // unique: true -> no puede haber dos categorías con el mismo nombre
-  nom: { type: String, required: true, unique: true, minlength: 2, maxlength: 50 },
-  // Descripción: opcional, máximo 300 caracteres
-  descripcio: { type: String, maxlength: 300 },
-});
+const categoriaSchema = new mongoose.Schema(
+  {
+    nom: {
+      type: String,
+      required: [true, 'El nom és obligatori'],
+      trim: true,
+      minlength: [3, 'El nom ha de tenir mínim 3 caràcters'],
+    },
+    slug: {
+      type: String,
+      required: [true, 'El slug és obligatori'],
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    descripcio: {
+      type: String,
+      trim: true,
+      maxlength: [500, 'La descripció no pot passar de 500 caràcters'],
+    },
+    actiu: { type: Boolean, default: true },
+  },
+  { timestamps: true }
+);
 
-// Creamos y exportamos el modelo 'Categoria'
 module.exports = mongoose.model('Categoria', categoriaSchema);

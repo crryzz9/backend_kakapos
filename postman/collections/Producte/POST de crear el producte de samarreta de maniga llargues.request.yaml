@@ -1,0 +1,20 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/productes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nom\": \"Samarreta de manigues llargues Kakapos\",\r
+
+    \  \"descripcio\": \"Samarreta de cotó amb el kakapo estampat i manigues llargues\",\r
+
+    \  \"preu\": 29.99,\r
+
+    \  \"estoc\": 50,\r
+
+    \  \"categoriaId\": \"6ad878391827627656fda09a\"\r
+
+    }"
+order: 3000

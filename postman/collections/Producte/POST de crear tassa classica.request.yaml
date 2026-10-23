@@ -1,0 +1,20 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/productes
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nom\": \"Tassa Kakapos Clàssica\",\r
+
+    \  \"descripcio\": \"Tassa de ceràmica de 350 ml amb el kakapo estampat\",\r
+
+    \  \"preu\": 6.90,\r
+
+    \  \"estoc\": 80,\r
+
+    \  \"categoriaId\": \"6ad879901827627656fda09c\"\r
+
+    }"
+order: 7000
