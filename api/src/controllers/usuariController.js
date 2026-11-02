@@ -46,10 +46,32 @@ const deleteUsuari = async (req, res, next) => {
   }
 };
 
+// POST /api/usuaris/registre
+const registrarse = async (req, res, next) => {
+  try {
+    const usuari = await usuariService.createUsuari(req.body ?? {});
+    res.status(201).json({ success: true, data: usuari });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// POST /api/usuaris/login
+const login = async (req, res, next) => {
+  try {
+    const resultat = await usuariService.login(req.body ?? {});
+    res.status(200).json({ success: true, data: resultat });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createUsuari,
   getUsuaris,
   getUsuari,
   updateUsuari,
   deleteUsuari,
+  registrarse,
+  login,
 };

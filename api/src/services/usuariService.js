@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const Usuari = require('../models/Usuari');
 const AppError = require('../utils/AppError');
 const { llistarPaginat } = require('../utils/consulta');
+const jwt = require('jsonwebtoken');
 
 // Únicos campos que se aceptan desde el body. rol, actiu, passwordHash... quedan fuera
 const CAMPS_PERMESOS = ['nom', 'email', 'password'];
@@ -19,7 +20,7 @@ const nomesCampsPermesos = (dades) => {
       400,
       'FIELD_NOT_ALLOWED',
       'Hi ha camps que no es poden enviar',
-      prohibits.map((camp) => ({ field: camp, message: 'Camp no permès' }))
+      prohibits.map((camp) => ({ field: camp, message: 'C amp no permès' }))
     );
   }
 };
@@ -77,11 +78,40 @@ const deleteUsuari = async (id) => {
   if (!usuari) throw noTrobat();
 };
 
+const login = async ({ email, password }) => {
+  if (typeof email !== 'string' || typeof password !== 'string') {
+    throw new AppError(422, 'VALIDATION_ERROR', 'Les dades no són vàlides', [
+      { field: 'email/password', message: 'Cal enviar email i password' },
+    ]);
+  }
+
+  const usuari = await Usuari.findOne({ email: email.trim().toLowerCase() });
+
+  // Mismo mensaje si el email no existe, está desactivado o la contraseña falla
+  const credencialsCorrectes =
+    usuari && usuari.actiu && (await bcrypt.compare(password, usuari.passwordHash));
+  if (!credencialsCorrectes) {
+    throw new AppError(401, 'INVALID_CREDENTIALS', 'Email o contrasenya incorrectes');
+  }
+
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET no està definit al .env');
+  }
+
+  const token = jwt.sign(
+    { id: usuari._id, rol: usuari.rol },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_IN || '1h' }
+  );
+
+  return { token, usuari };
+};
 
 module.exports = {
     getUsuari,
     getUsuaris,
     createUsuari,
     updateUsuari,
-    deleteUsuari
+    deleteUsuari,
+    login
 };

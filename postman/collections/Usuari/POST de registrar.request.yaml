@@ -1,0 +1,16 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/usuaris/registre"
+method: POST
+body:
+  type: json
+  content: "  {\r
+
+    \    \"nom\": \"Manolo\",\r
+
+    \    \"email\": \"manolo@example.com\",\r
+
+    \    \"password\": \"Contrasenya-Prova-2026\"\r
+
+    \  }"
+order: 13000
