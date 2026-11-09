@@ -2,7 +2,8 @@ const bcrypt = require('bcryptjs');
 const Usuari = require('../models/Usuari');
 const AppError = require('../utils/AppError');
 const { llistarPaginat } = require('../utils/consulta');
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
+const tokenService = require('./tokenService');
 
 // Únicos campos que se aceptan desde el body. rol, actiu, passwordHash... quedan fuera
 const CAMPS_PERMESOS = ['nom', 'email', 'password'];
@@ -94,17 +95,10 @@ const login = async ({ email, password }) => {
     throw new AppError(401, 'INVALID_CREDENTIALS', 'Email o contrasenya incorrectes');
   }
 
-  if (!process.env.JWT_SECRET) {
-    throw new Error('JWT_SECRET no està definit al .env');
-  }
+  // Access token (15 min) + refresh token (7 dies), este último guardado en Mongo
+  const { accessToken, refreshToken } = await tokenService.crearParellTokens(usuari);
 
-  const token = jwt.sign(
-    { id: usuari._id, rol: usuari.rol },
-    process.env.JWT_SECRET,
-    { expiresIn: process.env.JWT_EXPIRES_IN || '1h' }
-  );
-
-  return { token, usuari };
+  return { accessToken, refreshToken, usuari };
 };
 
 module.exports = {

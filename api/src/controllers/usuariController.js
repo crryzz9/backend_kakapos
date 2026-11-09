@@ -1,4 +1,5 @@
 const usuariService = require('../services/usuariService');
+const tokenService = require('../services/tokenService');
 
 const createUsuari = async (req, res, next) => {
   try {
@@ -66,6 +67,36 @@ const login = async (req, res, next) => {
   }
 };
 
+// POST /api/usuaris/refresh
+const refresh = async (req, res, next) => {
+  try {
+    const tokens = await tokenService.rotarRefreshToken(req.body?.refreshToken);
+    res.status(200).json({ success: true, data: tokens });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// POST /api/usuaris/logout
+const logout = async (req, res, next) => {
+  try {
+    await tokenService.revocarRefreshToken(req.body?.refreshToken);
+    res.status(204).send();
+  } catch (error) {
+    next(error);
+  }
+};
+
+// GET /api/usuaris/perfil (ruta protegida: el middleware ya ha puesto req.usuari)
+const perfil = async (req, res, next) => {
+  try {
+    const usuari = await usuariService.getUsuari(req.usuari.id);
+    res.status(200).json({ success: true, data: usuari });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createUsuari,
   getUsuaris,
@@ -74,4 +105,7 @@ module.exports = {
   deleteUsuari,
   registrarse,
   login,
+  refresh,
+  logout,
+  perfil,
 };

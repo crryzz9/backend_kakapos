@@ -10,3 +10,9 @@ values:
     value: ''
   - key: usuariId
     value: ''
+  - key: accessToken
+    value: ''
+  - key: refreshToken
+    value: ''
+  - key: refreshAntic
+    value: ''

@@ -1,0 +1,7 @@
+$kind: http-request
+description: ""
+url: "{{baseUrl}}/api/usuaris/perfil"
+method: GET
+auth:
+  type: noauth
+order: 17000
