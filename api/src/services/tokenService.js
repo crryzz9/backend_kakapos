@@ -5,6 +5,7 @@ const Usuari = require('../models/Usuari');
 const AppError = require('../utils/AppError');
 
 // Convierte el refresh token en un hash para guardarlo en Mongo (nunca en claro)
+// sha256 es para que sea irreversible y rapido, esto es para que no se pueda en la bbdd ver el token
 const hashToken = (token) => crypto.createHash('sha256').update(token).digest('hex');
 
 const comprovarSecrets = () => {

@@ -6,8 +6,10 @@ const usuariRoutes = require('./routes/usuariRoutes');
 const categoriaRoutes = require('./routes/categoriaRoutes');
 const AppError = require('./utils/AppError');
 const errorHandler = require('./middleware/errorHandler');
+const cors = require('cors');
 
 const app = express(); 
+app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json()); 
 
 connectDB(); 
